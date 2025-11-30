@@ -1,0 +1,33 @@
+services:
+  backend:
+    build: ./backend
+    container_name: todo-backend
+    ports:
+      - "8000:8000"
+    environment:
+      DJANGO_DEBUG: "True"
+      DJANGO_SECRET_KEY: "supersecretkey"
+      FRONTEND_URL: "http://localhost:3000"
+    volumes:
+      - ./backend:/app
+    command: python manage.py runserver 0.0.0.0:8000
+    networks:
+      - todo-network
+
+  frontend:
+    build: ./frontend
+    container_name: todo-frontend
+    ports:
+      - "3000:3000"
+    environment:
+      NEXT_PUBLIC_BACKEND_URL: "http://backend:8000/todos/"
+    depends_on:
+      - backend
+    volumes:
+      - ./frontend:/app
+    networks:
+      - todo-network
+
+networks:
+  todo-network:
+    driver: bridge
