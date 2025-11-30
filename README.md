@@ -17,5 +17,10 @@ A full-stack Todo application built with Django REST Framework (backend) and Nex
 - CORS enabled for cross-origin frontend requests
 
 ## Setup
-- You can run both backend and frontend using **Docker Compose**.
+- Clone the repository.
+- Go into the project.
+- You can run both backend and frontend by running:
+```sh
+docker-compose up
+```
 - Open http://localhost:3000 in your browser.
